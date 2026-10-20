@@ -72,6 +72,9 @@ Discriminatory power is weak for both models, consistent with recoveries being l
 lgd-modelling/
 ├── data/lgd_lendingclub_2007_2015.csv.gz   # prepared modelling sample
 ├── notebooks/lgd_modelling.ipynb           # full analysis (executed)
+├── streamlit_app.py                        # interactive Streamlit app
+├── app/lgd_core.py                         # modelling functions used by the app
+├── .streamlit/config.toml                  # app theme
 ├── src/
 │   ├── extract_lgd_data.py                 # builds the sample from the raw Kaggle file
 │   ├── lgd_model.py                        # notebook source (# %% cells)
@@ -81,10 +84,31 @@ lgd-modelling/
 └── LICENSE
 ```
 
-## How to run
+## Interactive app (Streamlit)
+
+An interactive companion app lets you explore the data, compare density estimators with adjustable bandwidths, edit the
+expert scorecard points and see the impact on calibration and discrimination, and compute the LGD of a hypothetical
+defaulted loan.
+
+**Live app:** _link to be added after deployment on Streamlit Community Cloud_
 
 ```bash
 pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
+| Tab | Content |
+|---|---|
+| Data | Recovery-rate distribution, mean LGD by default year, justification of the 2008–2015 scope |
+| Density estimation | Beta (moments, MLE) vs naive Gaussian, reflection, logit and Beta kernels by segment; bandwidth sliders; optional likelihood cross-validation; out-of-sample log-likelihood, KS and LGD quantiles |
+| Expert scorecard | Editable points and number of pools; calibration by pool with confidence intervals; monotonicity and t-tests; RMSE / CAP Gini vs simple mean and logit + Beta regression benchmark |
+| LGD calculator | Score, pool, pool LGD (long-run average + margin of conservatism), benchmark LGD and the pool's LGD distribution |
+| Methodology | Definitions, findings, limitations and references |
+
+## How to run the notebook
+
+```bash
+pip install -r requirements.txt jupyter
 cd notebooks
 jupyter notebook lgd_modelling.ipynb      # or: jupyter nbconvert --to notebook --execute lgd_modelling.ipynb
 ```

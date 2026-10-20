@@ -1,9 +1,11 @@
-# Tested with Python 3.13
+# Streamlit app + notebook dependencies (tested with Python 3.12–3.13)
+# Streamlit Community Cloud installs this file automatically.
+streamlit>=1.45
+plotly>=5.22
 pandas>=2.2
 numpy>=2.0
 scipy>=1.13
 statsmodels>=0.14
 scikit-learn>=1.5
 matplotlib>=3.8
-jupyter
 nbformat>=5.9
